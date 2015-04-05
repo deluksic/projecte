@@ -24,7 +24,7 @@ int main()
 	Student *students;
 	Exam *exams;
 	unsigned int studcount, examcount, i;
-	unsigned int hashes[M] = { 0 };
+	unsigned int hashes[M] = { 0 }, overflowcount = 0, hashaddr;
 
 	students = ReadStudents("pristupnici.txt", &studcount);
 	printf("stud count: %d\n", studcount);
@@ -41,13 +41,14 @@ int main()
 			printf("student id:%d score:%d\n", students[i].id, students[i].score);
 		for (i = 0; i < studcount; i++)
 		{
-			printf("id:%7d hash:%3d\n", students[i].id, HashAddress((unsigned int)students[i].id));
-			hashes[HashAddress(students[i].id)]++;
+			hashaddr = HashAddress((unsigned int)students[i].id);
+			printf("id:%7d hash:%3d\n", students[i].id, hashaddr);
+			overflowcount += (++hashes[hashaddr] > C ? 1 : 0);
 		}
 		printf("Hash distribution: ");
 		for (i = 0; i < M; i++)
 			printf("%d ", hashes[i]);
-		printf("\n");
+		printf("\nOverflow count: %d\n", overflowcount);
 	}
 
 	//success and wait for enter
