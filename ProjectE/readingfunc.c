@@ -46,7 +46,7 @@ void ReadStudents(char* filename, Student* outStudents, int* outCount){
 		outStudents[count].lastname[i] = 0;
 
 		printf(
-			"read entry: %d, %s, %s\n",
+			"stud entry: %d, %s, %s\n",
 			outStudents[count].id,
 			outStudents[count].firstname,
 			outStudents[count].lastname
@@ -54,5 +54,51 @@ void ReadStudents(char* filename, Student* outStudents, int* outCount){
 		count++;
 	}
 	fclose(fstudents);
+	*outCount = count;
+}
+
+// reads student entries from filename and saves 
+// them into memory on outStudents location.
+// Writes number of entries into outCount.
+void ReadExams(char* filename, Exam* outExams, int* outCount){
+	FILE *fexams;
+	int i, count;
+	char ch;
+
+	// read ispiti.txt, format: filename#mintreshold
+	if ((fexams = fopen(filename, "r")) == NULL)
+		errorexit("File \"ispiti.txt\" not found.", 404);
+
+	count = 0;
+	while (1) {
+		if ((outExams = (Exam*)malloc(sizeof(Exam) * (count + 1))) == NULL)
+			errorexit("Failed to allocate memory while reading.", 200);
+
+		// read filename
+		i = 0;
+		while (fscanf(fexams, "%c", &ch) == 1 && ch != '#'){
+			outExams[count].filename[i++] = ch;
+			if (i == 22)
+				errorexit("Error in reading exam line.", 104);
+		}
+		// terminate with 0
+		outExams[count].filename[i] = 0;
+
+		// read score threshold (the previous # is taken already 
+		// and we are ready to read threshold value)
+		if (fscanf(fexams, "%d", &outExams[count].scoreThreshold) != 1)
+			errorexit("Error in reading exam line.", 105);
+
+		printf(
+			"exam entry: %s, %d\n",
+			outExams[count].filename,
+			outExams[count].scoreThreshold
+			);
+		count++;
+
+		if (fscanf(fexams, "%c", &ch) != 1 || ch == EOF)
+			break;
+	}
+	fclose(fexams);
 	*outCount = count;
 }

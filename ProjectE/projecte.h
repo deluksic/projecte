@@ -12,8 +12,14 @@ typedef struct {
 	char lastname[20 + 1];
 } Student;
 
+typedef struct {
+	char filename[30 + 1];
+	int scoreThreshold;
+} Exam;
+
 char waitforkey();
 void errorexit(char* message, int code);
 void messageexit(char* message);
 
 void ReadStudents(char* filename, Student* outStudents, int* outCount);
+void ReadExams(char* filename, Exam* outExams, int* outCount);

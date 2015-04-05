@@ -21,11 +21,14 @@
 
 int main(){
 	Student students[1];
-	int count;
-	ReadStudents("pristupnici.txt", students, &count);
-	printf("count: %d\n", count);
+	int studcount;
+	Exam exams[1];
+	int examcount;
+	ReadStudents("pristupnici.txt", students, &studcount);
+	printf("stud count: %d\n", studcount);
 
-	// read ispiti.txt, format: filename#mintreshold
+	ReadExams("ispiti.txt", exams, &examcount);
+	printf("exam count: %d\n", examcount);
 
 	// success and wait for enter
 	messageexit("Successfuly wrote pristupnici.bin");
