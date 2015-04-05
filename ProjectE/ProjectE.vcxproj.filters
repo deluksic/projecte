@@ -15,13 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source.cpp">
+    <ClCompile Include="messages.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="readingfunc.cpp">
+    <ClCompile Include="readingfunc.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="messages.cpp">
+    <ClCompile Include="source.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

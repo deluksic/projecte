@@ -78,9 +78,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="messages.cpp" />
-    <ClCompile Include="readingfunc.cpp" />
-    <ClCompile Include="source.cpp" />
+    <ClCompile Include="messages.c" />
+    <ClCompile Include="readingfunc.c" />
+    <ClCompile Include="source.c" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="biologija.txt" />
