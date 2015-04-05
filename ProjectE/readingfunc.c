@@ -46,6 +46,9 @@ Student* ReadStudents(char* filename, int* outCount){
 		// terminate with 0
 		students[count].lastname[i] = 0;
 
+		// reset score
+		students[count].score = 0;
+
 		printf(
 			"stud entry: %d, %s, %s\n",
 			students[count].id,
@@ -110,23 +113,41 @@ Exam* ReadExams(char* filename, int* outCount){
 // reads student entries from filename and saves 
 // them into memory on outStudents location.
 // Writes number of entries into outCount.
-void ReadExamFile(char* filename, Student* students, int studentCount){
+void ReadExamFile(Exam* exam, Student* students, int studentCount){
 	FILE *fexam;
-	int count, id, score;
+	Student *currstud;
+	int id, score;
 
-	printf("Reading file %s\n", filename);
+	printf("Reading file %s\n", (*exam).filename);
 
 	// read ispiti.txt, format: filename#mintreshold
-	if ((fexam = fopen(filename, "r")) == NULL)
+	if ((fexam = fopen((*exam).filename, "r")) == NULL)
 		errorexit("File \"predmet.txt\" not found.", 404);
 
-	count = 0;
 	while (fscanf(fexam, "%d#%d", &id, &score) == 2) {
-		printf(
-			"exam result: id:%d, score:%d\n",
-			id, score
-			);
-		count++;
+		if (score < (*exam).scoreThreshold){
+			printf("student with id:%d failed this exam.\n", id);
+			continue;
+		}
+		else {
+			if ((currstud = FindStudentById(students, studentCount, id)) != NULL){
+				(*currstud).score += score;
+				printf("exam result: id:%d, score:%d\n", id, score);
+			}
+			else{
+				printf("Student with id %d doesn't exist.\n", id);
+			}
+		}
 	}
 	fclose(fexam);
+}
+
+// O(n) search through array by id
+Student* FindStudentById(Student* students, int studentCount, int id){
+	int i;
+	for (i = 0; i < studentCount; i++){
+		if (students[i].id == id)
+			return &students[i];
+	}
+	return NULL;
 }

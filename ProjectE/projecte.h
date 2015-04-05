@@ -10,6 +10,7 @@ typedef struct {
 	int id;
 	char firstname[20 + 1];
 	char lastname[20 + 1];
+	int score;
 } Student;
 
 typedef struct {
@@ -23,4 +24,5 @@ void messageexit(char* message);
 
 Student* ReadStudents(char* filename, int* outCount);
 Exam* ReadExams(char* filename, int* outCount);
-void ReadExamFile(char* filename, Student* students, int studentCount);
+void ReadExamFile(Exam* exam, Student* students, int studentCount);
+Student* FindStudentById(Student* students, int studentCount, int id);

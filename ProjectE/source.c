@@ -21,9 +21,8 @@
 
 int main(){
 	Student *students;
-	int studcount;
 	Exam *exams;
-	int examcount;
+	int studcount, examcount, i;
 
 	students = ReadStudents("pristupnici.txt", &studcount);
 	printf("stud count: %d\n", studcount);
@@ -31,7 +30,11 @@ int main(){
 	exams = ReadExams("ispiti.txt", &examcount);
 	printf("exam count: %d\n", examcount);
 
-	ReadExamFile(exams[1].filename, students, studcount);
+	for (i = 0; i < examcount; i++)
+		ReadExamFile(&exams[i], students, studcount);
+
+	for (i = 0; i < studcount; i++)
+		printf("student id:%d score:%d\n", students[i].id, students[i].score);
 
 	// success and wait for enter
 	messageexit("Successfuly wrote pristupnici.bin");
