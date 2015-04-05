@@ -24,6 +24,9 @@
     <ClCompile Include="source.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="writingfunc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="biologija.txt">

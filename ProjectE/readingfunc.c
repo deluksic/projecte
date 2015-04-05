@@ -3,7 +3,8 @@
 // reads student entries from filename and saves 
 // them into memory on outStudents location.
 // Writes number of entries into outCount.
-Student* ReadStudents(char* filename, int* outCount){
+Student* ReadStudents(char* filename, int* outCount)
+{
 	Student* students = (Student*)malloc(sizeof(Student));
 	FILE *fstudents;
 	int i, count, nextid;
@@ -15,7 +16,8 @@ Student* ReadStudents(char* filename, int* outCount){
 
 	count = 0;
 	nextid = 0;
-	while (fscanf(fstudents, "%d", &nextid) == 1) {
+	while (fscanf(fstudents, "%d", &nextid) == 1)
+	{
 		if ((students = (Student*)realloc(students, sizeof(Student) * (count + 1))) == NULL)
 			errorexit("Failed to allocate memory while reading.", 200);
 
@@ -28,7 +30,8 @@ Student* ReadStudents(char* filename, int* outCount){
 
 		// read first name
 		i = 0;
-		while (fscanf(fstudents, "%c", &ch) == 1 && ch != '#'){
+		while (fscanf(fstudents, "%c", &ch) == 1 && ch != '#')
+		{
 			students[count].firstname[i++] = ch;
 			if (i == 22)
 				errorexit("Error in reading student line.", 102);
@@ -38,7 +41,8 @@ Student* ReadStudents(char* filename, int* outCount){
 
 		// read last name
 		i = 0;
-		while (fscanf(fstudents, "%c", &ch) == 1 && ch != '#' && ch != '\n'){
+		while (fscanf(fstudents, "%c", &ch) == 1 && ch != '#' && ch != '\n')
+		{
 			students[count].lastname[i++] = ch;
 			if (i == 22)
 				errorexit("Error in reading student line.", 103);
@@ -49,7 +53,8 @@ Student* ReadStudents(char* filename, int* outCount){
 		// reset score
 		students[count].score = 0;
 
-		printf(
+		if (DEBUG)
+			printf(
 			"stud entry: %d, %s, %s\n",
 			students[count].id,
 			students[count].firstname,
@@ -65,7 +70,8 @@ Student* ReadStudents(char* filename, int* outCount){
 // reads student entries from filename and saves 
 // them into memory on outStudents location.
 // Writes number of entries into outCount.
-Exam* ReadExams(char* filename, int* outCount){
+Exam* ReadExams(char* filename, int* outCount)
+{
 	Exam* exams = (Exam*)malloc(sizeof(Exam));
 	FILE *fexams;
 	int i, count;
@@ -76,13 +82,15 @@ Exam* ReadExams(char* filename, int* outCount){
 		errorexit("File \"ispiti.txt\" not found.", 404);
 
 	count = 0;
-	while (1) {
+	while (1)
+	{
 		if ((exams = (Exam*)realloc(exams, sizeof(Exam) * (count + 1))) == NULL)
 			errorexit("Failed to allocate memory while reading.", 200);
 
 		// read filename
 		i = 0;
-		while (fscanf(fexams, "%c", &ch) == 1 && ch != '#'){
+		while (fscanf(fexams, "%c", &ch) == 1 && ch != '#')
+		{
 			exams[count].filename[i++] = ch;
 			if (i == 22)
 				errorexit("Error in reading exam line.", 104);
@@ -95,11 +103,7 @@ Exam* ReadExams(char* filename, int* outCount){
 		if (fscanf(fexams, "%d", &exams[count].scoreThreshold) != 1)
 			errorexit("Error in reading exam line.", 105);
 
-		printf(
-			"exam entry: %s, %d\n",
-			exams[count].filename,
-			exams[count].scoreThreshold
-			);
+		printf("exam entry: %s, %d\n", exams[count].filename, exams[count].scoreThreshold);
 		count++;
 
 		if (fscanf(fexams, "%c", &ch) != 1 || ch == EOF)
@@ -113,7 +117,8 @@ Exam* ReadExams(char* filename, int* outCount){
 // reads student entries from filename and saves 
 // them into memory on outStudents location.
 // Writes number of entries into outCount.
-void ReadExamFile(Exam* exam, Student* students, int studentCount){
+void ReadExamFile(Exam* exam, Student* students, int studentCount)
+{
 	FILE *fexam;
 	Student *currstud;
 	int id, score;
@@ -124,18 +129,27 @@ void ReadExamFile(Exam* exam, Student* students, int studentCount){
 	if ((fexam = fopen((*exam).filename, "r")) == NULL)
 		errorexit("File \"predmet.txt\" not found.", 404);
 
-	while (fscanf(fexam, "%d#%d", &id, &score) == 2) {
-		if (score < (*exam).scoreThreshold){
-			printf("student with id:%d failed this exam.\n", id);
+	while (fscanf(fexam, "%d#%d", &id, &score) == 2)
+	{
+		if (score < (*exam).scoreThreshold)
+		{
+			if (DEBUG)
+				printf("student with id:%d failed this exam.\n", id);
 			continue;
 		}
-		else {
-			if ((currstud = FindStudentById(students, studentCount, id)) != NULL){
+		else
+		{
+			if ((currstud = FindStudentById(students, studentCount, id)) != NULL)
+			{
 				(*currstud).score += score;
-				printf("exam result: id:%d, score:%d\n", id, score);
+				(*currstud).passedexams += 1;
+				if (DEBUG)
+					printf("exam result: id:%d, score:%d\n", id, score);
 			}
-			else{
-				printf("Student with id %d doesn't exist.\n", id);
+			else
+			{
+				if (DEBUG)
+					printf("Student with id %d doesn't exist.\n", id);
 			}
 		}
 	}
@@ -143,9 +157,11 @@ void ReadExamFile(Exam* exam, Student* students, int studentCount){
 }
 
 // O(n) search through array by id
-Student* FindStudentById(Student* students, int studentCount, int id){
+Student* FindStudentById(Student* students, int studentCount, int id)
+{
 	int i;
-	for (i = 0; i < studentCount; i++){
+	for (i = 0; i < studentCount; i++)
+	{
 		if (students[i].id == id)
 			return &students[i];
 	}

@@ -19,10 +19,12 @@
 #include "projecte.h"
 #include <string.h>
 
-int main(){
+int main()
+{
 	Student *students;
 	Exam *exams;
-	int studcount, examcount, i;
+	unsigned int studcount, examcount, i;
+	unsigned int hashes[M] = { 0 };
 
 	students = ReadStudents("pristupnici.txt", &studcount);
 	printf("stud count: %d\n", studcount);
@@ -33,10 +35,22 @@ int main(){
 	for (i = 0; i < examcount; i++)
 		ReadExamFile(&exams[i], students, studcount);
 
-	for (i = 0; i < studcount; i++)
-		printf("student id:%d score:%d\n", students[i].id, students[i].score);
+	if (DEBUG)
+	{
+		for (i = 0; i < studcount; i++)
+			printf("student id:%d score:%d\n", students[i].id, students[i].score);
+		for (i = 0; i < studcount; i++)
+		{
+			printf("id:%7d hash:%3d\n", students[i].id, HashAddress((unsigned int)students[i].id));
+			hashes[HashAddress(students[i].id)]++;
+		}
+		printf("Hash distribution: ");
+		for (i = 0; i < M; i++)
+			printf("%d ", hashes[i]);
+		printf("\n");
+	}
 
-	// success and wait for enter
+	//success and wait for enter
 	messageexit("Successfuly wrote pristupnici.bin");
 	return 0;
 }
