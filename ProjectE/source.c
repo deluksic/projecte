@@ -20,15 +20,18 @@
 #include <string.h>
 
 int main(){
-	Student students[1];
+	Student *students;
 	int studcount;
-	Exam exams[1];
+	Exam *exams;
 	int examcount;
-	ReadStudents("pristupnici.txt", students, &studcount);
+
+	students = ReadStudents("pristupnici.txt", &studcount);
 	printf("stud count: %d\n", studcount);
 
-	ReadExams("ispiti.txt", exams, &examcount);
+	exams = ReadExams("ispiti.txt", &examcount);
 	printf("exam count: %d\n", examcount);
+
+	ReadExamFile(exams[1].filename, students, studcount);
 
 	// success and wait for enter
 	messageexit("Successfuly wrote pristupnici.bin");
