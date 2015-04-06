@@ -10,7 +10,7 @@ char waitforkey()
 }
 
 // exits with a message and error
-void errorexit(char* message, int code)
+void errorexit(char *message, int code)
 {
 	printf("Error %d. %s\n", code, message);
 	waitforkey();
@@ -18,7 +18,7 @@ void errorexit(char* message, int code)
 }
 
 // exits with a message
-void messageexit(char* message)
+void messageexit(char *message)
 {
 	printf("%s\n", message);
 	waitforkey();
@@ -26,14 +26,14 @@ void messageexit(char* message)
 }
 
 // message the user without interrupt
-void debugprint(char* message)
+void debugprint(char *message)
 {
 	if (DEBUG)
 		printf(message);
 }
 
 // message the user, wait for enter
-void messagewait(char* message)
+void messagewait(char *message)
 {
 	printf(message);
 	waitforkey();

@@ -35,21 +35,7 @@ int main()
 	for (i = 0; i < examcount; i++)
 		ReadExamFile(&exams[i], students, studcount);
 
-	if (DEBUG)
-	{
-		for (i = 0; i < studcount; i++)
-			printf("student id:%d score:%d\n", students[i].id, students[i].score);
-		for (i = 0; i < studcount; i++)
-		{
-			hashaddr = HashAddress((unsigned int)students[i].id);
-			printf("id:%7d hash:%3d\n", students[i].id, hashaddr);
-			overflowcount += (++hashes[hashaddr] > C ? 1 : 0);
-		}
-		printf("Hash distribution: ");
-		for (i = 0; i < M; i++)
-			printf("%d ", hashes[i]);
-		printf("\nOverflow count: %d\n", overflowcount);
-	}
+	WriteStudents("pristupnici.bin", students, studcount);
 
 	//success and wait for enter
 	messageexit("Successfuly wrote pristupnici.bin");

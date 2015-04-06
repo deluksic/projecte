@@ -3,7 +3,7 @@
 // reads student entries from filename and saves 
 // them into memory on outStudents location.
 // Writes number of entries into outCount.
-Student* ReadStudents(char* filename, int* outCount)
+Student* ReadStudents(char *filename, int *outCount)
 {
 	Student* students = (Student*)malloc(sizeof(Student));
 	FILE *fstudents;
@@ -70,7 +70,7 @@ Student* ReadStudents(char* filename, int* outCount)
 // reads student entries from filename and saves 
 // them into memory on outStudents location.
 // Writes number of entries into outCount.
-Exam* ReadExams(char* filename, int* outCount)
+Exam* ReadExams(char *filename, int *outCount)
 {
 	Exam* exams = (Exam*)malloc(sizeof(Exam));
 	FILE *fexams;
@@ -117,7 +117,7 @@ Exam* ReadExams(char* filename, int* outCount)
 // reads student entries from filename and saves 
 // them into memory on outStudents location.
 // Writes number of entries into outCount.
-void ReadExamFile(Exam* exam, Student* students, int studentCount)
+void ReadExamFile(Exam *exam, Student *students, int studentCount)
 {
 	FILE *fexam;
 	Student *currstud;
@@ -157,7 +157,7 @@ void ReadExamFile(Exam* exam, Student* students, int studentCount)
 }
 
 // O(n) search through array by id
-Student* FindStudentById(Student* students, int studentCount, int id)
+Student* FindStudentById(Student *students, int studentCount, int id)
 {
 	int i;
 	for (i = 0; i < studentCount; i++)
