@@ -5,6 +5,7 @@
 *.suo
 *.user
 *.sln.docstates
+pristupnici.bin
 
 # Build results
 [Dd]ebug/
