@@ -81,3 +81,13 @@ void PrepareTable(FILE *ft)
 	printf("Table cleared N=%d, C=%d, M=%d\n", N, C, M);
 	printf("Slot size = %d\n", sizeof(slot));
 }
+
+void PrintStudents(Student *studentBegin, int studentCount)
+{
+	Student *ptemp = studentBegin;
+	while (ptemp < studentBegin + studentCount)
+	{
+		printf("id:%d score:%d\n", ptemp->id, ptemp->score);
+		ptemp++;
+	}
+}

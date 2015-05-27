@@ -78,6 +78,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="mergesort.c" />
     <ClCompile Include="messages.c" />
     <ClCompile Include="readingfunc.c" />
     <ClCompile Include="source.c" />

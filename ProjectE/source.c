@@ -22,9 +22,10 @@
 int main()
 {
 	Student *students;
+	Student *temp;
 	Exam *exams;
 	unsigned int studcount, examcount, i;
-	unsigned int hashes[M] = { 0 }, overflowcount = 0, hashaddr;
+	unsigned int hashes[M] = { 0 }, overflowcount = 0;
 
 	students = ReadStudents("pristupnici.txt", &studcount);
 	printf("stud count: %d\n", studcount);
@@ -35,7 +36,13 @@ int main()
 	for (i = 0; i < examcount; i++)
 		ReadExamFile(&exams[i], students, studcount);
 
-	WriteStudents("pristupnici.bin", students, studcount);
+	PrintStudents(students, studcount);
+	//WriteStudents("pristupnici.bin", students, studcount);
+
+	temp = (Student*)malloc(sizeof(Student)*(studcount));
+	MergeSort(students, temp, studcount);
+	PrintStudents(students, studcount);
+	//free(temp);
 
 	//success and wait for enter
 	messageexit("Successfuly wrote pristupnici.bin");

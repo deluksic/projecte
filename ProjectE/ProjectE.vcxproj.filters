@@ -27,6 +27,9 @@
     <ClCompile Include="writingfunc.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="mergesort.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="biologija.txt">
