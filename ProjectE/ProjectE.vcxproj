@@ -80,6 +80,7 @@
   <ItemGroup>
     <ClCompile Include="mergesort.c" />
     <ClCompile Include="messages.c" />
+    <ClCompile Include="quicksort.c" />
     <ClCompile Include="readingfunc.c" />
     <ClCompile Include="source.c" />
     <ClCompile Include="writingfunc.c" />

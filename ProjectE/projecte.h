@@ -34,7 +34,10 @@ void messageexit(char *message);
 void debugprint(char *message);
 void messagewait(char *message);
 
+Student slot[C];
+
 Student* ReadStudents(char *filename, int *outCount);
+Student* ReadStudentsBin(char *filename, int *outCount);
 Exam* ReadExams(char *filename, int *outCount);
 void ReadExamFile(Exam *exam, Student *students, int studentCount);
 Student* FindStudentById(Student *students, int studentCount, int id);
@@ -44,4 +47,8 @@ void WriteStudents(char *filename, Student *students, int studentCount);
 void PrintStudents(Student *studentBegin, int studentCount);
 void PrepareTable(FILE *ft);
 
-void MergeSort(Student *studentBegin, Student *studentEnd);
+void MergeSort(Student *studentBegin, Student *temp, int studentCount);
+void QuickSort(Student *s1, Student *s2);
+void SwapStudents(Student *s1, Student *s2);
+void SwapStudentsCond(Student *s1, Student *s2);
+void SortThreeStudents(Student *s1, Student *s2, Student *s3);

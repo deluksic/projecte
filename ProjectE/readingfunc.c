@@ -67,6 +67,40 @@ Student* ReadStudents(char *filename, int *outCount)
 	return students;
 }
 
+Student* ReadStudentsBin(char *filename, int *outCount)
+{
+	Student* students = (Student*)malloc(sizeof(Student));
+	FILE *fstudents;
+	int i, j, count, nextid;
+	char ch;
+
+	count = 0;
+	// read pristupnici.bin
+	if ((fstudents = fopen(filename, "rb")) == NULL)
+		errorexit("File \"pristupnici.bin\" not found.", 404);
+
+	for (i = 0; i < M; i++)
+	{
+		fseek(fstudents, i*BLOK, SEEK_SET);
+		fread(slot, sizeof(slot), 1, fstudents);
+		for (j = 0; j < C; j++)
+		{
+			if (slot[j].id == 0)
+				continue;
+
+			if ((students = (Student*)realloc(students, sizeof(Student) * (count + 1))) == NULL)
+				errorexit("Failed to allocate memory while reading.", 200);
+
+			students[count++] = slot[j];
+		}
+
+	}
+
+	fclose(fstudents);
+	*outCount = count;
+	return students;
+}
+
 // reads student entries from filename and saves 
 // them into memory on outStudents location.
 // Writes number of entries into outCount.

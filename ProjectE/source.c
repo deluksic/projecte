@@ -36,11 +36,17 @@ int main()
 	for (i = 0; i < examcount; i++)
 		ReadExamFile(&exams[i], students, studcount);
 
+	WriteStudents("pristupnici.bin", students, studcount);
+
+	free(students);
+	students = ReadStudentsBin("pristupnici.bin", &studcount);
+	printf("Read students:\n");
 	PrintStudents(students, studcount);
-	//WriteStudents("pristupnici.bin", students, studcount);
 
 	temp = (Student*)malloc(sizeof(Student)*(studcount));
-	MergeSort(students, temp, studcount);
+	//MergeSort(students, temp, studcount);
+	QuickSort(students, students + studcount - 1);
+	printf("Sorted students:\n");
 	PrintStudents(students, studcount);
 	//free(temp);
 

@@ -1,12 +1,5 @@
 #include "projecte.h"
 
-void SwapStudents(Student *s1, Student *s2)
-{
-	Student stemp = *s2;
-	*s2 = *s1;
-	*s1 = stemp;
-}
-
 void Merge(Student *studentBegin, Student *temp, int studentCount)
 {
 	Student *ptemp = temp;
@@ -31,8 +24,7 @@ void MergeSort(Student *studentBegin, Student *temp, int studentCount)
 	if (studentCount <= 1) return;
 	if (studentCount == 2)
 	{
-		if (studentBegin->score < (studentBegin + 1)->score)
-			SwapStudents(studentBegin, studentBegin + 1);
+		SwapStudentsCond(studentBegin, studentBegin + 1);
 		return;
 	}
 	MergeSort(studentBegin, temp, studentCount / 2);

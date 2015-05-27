@@ -1,7 +1,5 @@
 #include "projecte.h"
 
-Student slot[C];
-
 unsigned int HashAddress(unsigned int x)
 {
 	x = ((x >> 16) ^ x) * 0x45d9f3b;
@@ -72,6 +70,7 @@ void PrepareTable(FILE *ft)
 {
 	int i;
 	printf("Clearing table...");
+	// empty row is identified by id = 0
 	for (i = 0; i < C; i++) slot[i].id = 0;
 	for (i = 0; i < M; i++)
 	{
