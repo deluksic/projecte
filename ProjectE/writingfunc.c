@@ -57,6 +57,20 @@ void WriteStudents(char *filename, Student *students, int studentCount)
 {
 	FILE *ft;
 	int i = 0;
+	if ((ft = fopen(filename, "w+")) == NULL)
+		errorexit("Could not open \"ranglista.txt\" for writing.", 301);
+	
+	for (i = 0; i < studentCount; i++)
+		if(fprintf(ft, "%d#%d#%s#%s#%d\n", i + 1, students[i].id, students[i].firstname, students[i].lastname, students[i].score) < 0)
+			errorexit("Failed while writing.", 234);
+
+	fclose(ft);
+}
+
+void WriteStudentsBin(char *filename, Student *students, int studentCount)
+{
+	FILE *ft;
+	int i = 0;
 	if ((ft = fopen(filename, "wb+")) == NULL)
 		errorexit("Could not open \"pristupnici.bin\" for writing.", 301);
 	PrepareTable(ft);

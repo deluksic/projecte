@@ -6,6 +6,8 @@
 *.user
 *.sln.docstates
 pristupnici.bin
+ranglista.txt
+diskvalifikacije.txt
 
 # Build results
 [Dd]ebug/
