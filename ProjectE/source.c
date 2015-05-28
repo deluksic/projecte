@@ -50,8 +50,9 @@ int main()
 	PrintStudents(students, studcount);
 	free(temp);
 
-	//success and wait for enter
 	WriteStudents("ranglista.txt", students, studcount);
-	messageexit("Successfuly written ranglista.txt.");
+	printf("Successfuly written ranglista.txt.\n");
+	WriteStudentsCond("diskvalifikacije.txt", students, studcount, examcount);
+	messageexit("Successfuly written diskvalifikacije.txt.");
 	return 0;
 }

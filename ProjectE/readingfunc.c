@@ -49,9 +49,10 @@ Student* ReadStudents(char *filename, int *outCount)
 		}
 		// terminate with 0
 		students[count].lastname[i] = 0;
-
 		// reset score
 		students[count].score = 0;
+		// reset passed exams
+		students[count].passedexams = 0;
 
 		if (DEBUG)
 			printf(

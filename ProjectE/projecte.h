@@ -44,6 +44,7 @@ Student* FindStudentById(Student *students, int studentCount, int id);
 
 unsigned int HashAddress(unsigned int x);
 void WriteStudents(char *filename, Student *students, int studentCount);
+void WriteStudentsCond(char *filename, Student *students, int studentCount, int examCount);
 void WriteStudentsBin(char *filename, Student *students, int studentCount);
 void PrintStudents(Student *studentBegin, int studentCount);
 void PrepareTable(FILE *ft);

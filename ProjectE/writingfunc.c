@@ -59,10 +59,25 @@ void WriteStudents(char *filename, Student *students, int studentCount)
 	int i = 0;
 	if ((ft = fopen(filename, "w+")) == NULL)
 		errorexit("Could not open \"ranglista.txt\" for writing.", 301);
-	
+
 	for (i = 0; i < studentCount; i++)
-		if(fprintf(ft, "%d#%d#%s#%s#%d\n", i + 1, students[i].id, students[i].firstname, students[i].lastname, students[i].score) < 0)
+		if (fprintf(ft, "%d#%d#%s#%s#%d\n", i + 1, students[i].id, students[i].firstname, students[i].lastname, students[i].score) < 0)
 			errorexit("Failed while writing.", 234);
+
+	fclose(ft);
+}
+
+void WriteStudentsCond(char *filename, Student *students, int studentCount, int examCount)
+{
+	FILE *ft;
+	int i = 0, count = 0;
+	if ((ft = fopen(filename, "w+")) == NULL)
+		errorexit("Could not open \"diskvalifikacije.txt\" for writing.", 301);
+
+	for (i = 0; i < studentCount; i++)
+		if (students[i].passedexams != examCount)
+			if (fprintf(ft, "%d#%d#%s#%s#%d\n", ++count, students[i].id, students[i].firstname, students[i].lastname, students[i].score) < 0)
+				errorexit("Failed while writing.", 234);
 
 	fclose(ft);
 }
@@ -100,7 +115,7 @@ void PrintStudents(Student *studentBegin, int studentCount)
 	Student *ptemp = studentBegin;
 	while (ptemp < studentBegin + studentCount)
 	{
-		printf("id:%d score:%d\n", ptemp->id, ptemp->score);
+		printf("id:%d\tscore:%d\tpassed exams:%d\n", ptemp->id, ptemp->score, ptemp->passedexams);
 		ptemp++;
 	}
 }
